@@ -11,7 +11,7 @@ public class ApCompiladorRecursivoAtributoEL {
 
     
     static Lexico lexico = new Lexico();
-    static String cad = "((5*4)+2)*5.4¬";
+    static String cad = "((5+15)*2)/2¬";
     static String cad1 = "0123456789.";
     // variable indice es global y controla el indice del objwro lex1
     static int indice=0;
@@ -67,6 +67,7 @@ public class ApCompiladorRecursivoAtributoEL {
                     rechace();
         }
     }
+    
     public static void procEL(double i1,NoTerminal s1){
         // <E_L> --> +<T><E_L>
         // <E_L> --> -<T><E_L>  no está implementada
@@ -81,7 +82,16 @@ public class ApCompiladorRecursivoAtributoEL {
                     suma(i1,s2.getValor(),s3);
                     procEL(s3.getValor(),s1);
                     return;
-
+                    
+       case '-':
+                    avance();
+                    NoTerminal s4 = new NoTerminal("s4",0,0);
+                    procT(s4);
+                    NoTerminal s5 = new NoTerminal("s5",0,0);
+                    resta(i1,s4.getValor(),s5);
+                    procEL(s5.getValor(),s1);
+                    return;
+            
             case ')': case '¬':
                     s1.setValor(i1);
                     return;
@@ -111,6 +121,7 @@ public class ApCompiladorRecursivoAtributoEL {
                     rechace();
         }
     }
+    
     public static void procTL(double i1,NoTerminal s1){
         // <T_L> --> *<P><T_L>
         // <T_L> --> /<P><T_L>   no está implementada
@@ -126,8 +137,19 @@ public class ApCompiladorRecursivoAtributoEL {
                     mul(i1,s2.getValor(),s3);
                     procTL(s3.getValor(),s1);
                     return;
-                 
-            case '+': case ')': case '¬':
+            
+            case '/':
+                    
+                    avance();
+                    NoTerminal s4 = new NoTerminal("s4",0,0);
+                    procP(s4);
+                    NoTerminal s5 = new NoTerminal("s5",0,0);
+                    div(i1,s4.getValor(),s5);
+                    procTL(s5.getValor(),s1);
+                    return;
+            
+              
+            case '-': case '+': case ')': case '¬':
                     s1.setValor(i1);
                     return;
        
@@ -173,9 +195,25 @@ public class ApCompiladorRecursivoAtributoEL {
         s3.setValor(i1+i2);
     }
     
+    public static void resta(double i1,double i2,NoTerminal s3){
+        System.out.println("Elementos a restar"+i1+" "+i2);
+        s3.setValor(i1-i2);
+    }
+    
     public static void mul(double i1, double i2,NoTerminal s3){
         s3.setValor(i1*i2);
     }
+    
+    public static void div(double i1, double i2, NoTerminal s3){
+        if (i2==0){
+            System.out.println("Erro Division por cero");
+            rechace();
+        }else{
+            s3.setValor(i1/i2);
+        }
+        
+    }
+    
     
     public static void resultado(double res){
         System.out.println("Resultado ="+res);
