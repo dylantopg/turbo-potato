@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package apcompiladorrecursivoatributoel;
 
 import java.util.ArrayList;
@@ -13,39 +9,42 @@ import java.util.ArrayList;
  */
 public class Lexico {
     private ArrayList<Elemento> cadena;
-    //Métodos
-    public Lexico(){
+
+    // Métodos
+    public Lexico() {
         cadena = new ArrayList();
     }
-    
-    public void adicionarElemento(Elemento ele){
+
+    public void adicionarElemento(Elemento ele) {
         cadena.add(ele);
     }
-    
-    public Elemento darElemento(int ind){
+
+    public Elemento darElemento(int ind) {
         return cadena.get(ind);
     }
-    
-    public int darTamañoCadena(){
+
+    public int darTamañoCadena() {
         return cadena.size();
     }
-    
-    public void mostrarLexico(){
-        Elemento ele; 
-        for (int i=0;i<cadena.size();i++){
-            ele=darElemento(i);
-            System.out.println("Tipo "+(char)ele.darTipo()+" Valor "+(double)ele.darValor()+"  Indice "+(int)ele.darIndice());
-            
+
+    public void mostrarLexico() {
+        Elemento ele;
+        for (int i = 0; i < cadena.size(); i++) {
+            ele = darElemento(i);
+            System.out.println("Tipo " + (char) ele.darTipo() + " Valor " + (double) ele.darValor() + "  Indice "
+                    + (int) ele.darIndice());
+
         }
     }
-    public String cadenaLexico(){
-        String cadena1="";
+
+    public String cadenaLexico() {
+        String cadena1 = "";
         Elemento ele1;
-        for(int i=0;i<cadena.size();i++){
+        for (int i = 0; i < cadena.size(); i++) {
             ele1 = darElemento(i);
-                    
-        cadena1=cadena1+ele1.darTipo();
+
+            cadena1 = cadena1 + ele1.darTipo();
         }
         return cadena1;
-    }    
+    }
 }
