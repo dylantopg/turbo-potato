@@ -3,10 +3,6 @@ package apcompiladorrecursivoatributoel;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author SistemaInvestigacion
- */
 public class Lexico {
     private ArrayList<Elemento> cadena;
 

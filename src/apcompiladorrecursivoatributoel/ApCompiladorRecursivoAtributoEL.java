@@ -15,10 +15,7 @@ public class ApCompiladorRecursivoAtributoEL {
     static String cadavance = "";
 
     public static void main(String[] args) {
-        /*
-         * InputStreamReader isr= new InputStreamReader(System.in);
-         * BufferedReader flujoE = new BufferedReader(isr);
-         */
+
         analisisLexico();
         cad = lex1.cadenaLexico();
         sim = lex1.darElemento(indice).darTipo();
